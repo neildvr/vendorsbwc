@@ -165,7 +165,7 @@ while ($row=mysqli_fetch_array($ret))
 
 			<div class="product-price">	
 				<span class="price">
-					Item ID: <?php echo htmlentities($row['id']);?>			</span>
+					Item ID: 10<?php echo htmlentities($row['id']);?>			</span>
 										     
 									
 			</div>

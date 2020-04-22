@@ -453,57 +453,8 @@ while($row=mysqli_fetch_array($query))
 </div>
 
 
-<div class="control-group">
-<label class="control-label" for="basicinput">Product Name</label>
-<div class="controls">
-<input type="text"    name="productName" value="Food Center Item" placeholder="Enter Product Name" class="span8 tip" required>
-</div>
-</div>
 
-<div class="control-group">
-<label class="control-label" for="basicinput">Product Company</label>
-<div class="controls">
-<input type="text"    name="productCompany" value="Food Center Item" placeholder="Enter Product Comapny Name" class="span8 tip" required>
-</div>
-</div>
-<div class="control-group">
-<label class="control-label" for="basicinput">Product Price Before Discount</label>
-<div class="controls">
-<input type="text"    name="productpricebd" value="9" placeholder="Enter Product Price" class="span8 tip" required>
-</div>
-</div>
 
-<div class="control-group">
-<label class="control-label" for="basicinput">Product Price After Discount(Selling Price)</label>
-<div class="controls">
-<input type="text"    name="productprice" value="0" placeholder="Enter Product Price" class="span8 tip" required>
-</div>
-</div>
-
-<div class="control-group">
-<label class="control-label" for="basicinput">Product Description</label>
-<div class="controls">
-<textarea  name="productDescription"  placeholder="Enter Product Description" rows="6" class="span8 tip">
-</textarea>  
-</div>
-</div>
-
-<div class="control-group">
-<label class="control-label" for="basicinput">Product Shipping Charge</label>
-<div class="controls">
-<input type="text"    name="productShippingcharge" value="0" placeholder="Enter Product Shipping Charge" class="span8 tip" required>
-</div>
-</div>
-
-<div class="control-group">
-<label class="control-label" for="basicinput">Product Availability</label>
-<div class="controls">
-<select   name="productAvailability"  id="productAvailability" class="span8 tip" required>
-<option value="In Stock">In Stock</option>
-<option value="Out of Stock">Out of Stock</option>
-</select>
-</div>
-</div>
 
 
 
