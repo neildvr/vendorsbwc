@@ -9,16 +9,24 @@
         <div class="logo">
             <a href="index.php">
                 
-<h3>Catalog</h3>
+<h3>Shopping Portal</h3>
             </a>
         </div><!-- /.logo -->
     
     </div><!-- /.footer-logo -->
 
      <div class="module-body m-t-20">
-        <p class="about-us"> Use <b>Item ID</b> to increare acccacty of the order</p>
+        <p class="about-us"> Nam libero tempore, cum soluta nobis est ses  eligendi optio cumque cum soluta nobis est ses  eligendi optio cumque.</p>
     
-        
+        <div class="social-icons">
+            
+        <a href="http://facebook.com/transvelo" class='active'><i class="icon fa fa-facebook"></i></a>
+        <a href="#"><i class="icon fa fa-twitter"></i></a>
+        <a href="#"><i class="icon fa fa-linkedin"></i></a>
+        <a href="#"><i class="icon fa fa-rss"></i></a>
+        <a href="#"><i class="icon fa fa-pinterest"></i></a>
+
+        </div><!-- /.social-icons -->
     </div><!-- /.module-body -->
 
 </div><!-- /.contact-info -->
@@ -26,11 +34,27 @@
 
             	<div class="col-xs-12 col-sm-6 col-md-4">
             		 <!-- ============================================================= CONTACT TIMING============================================================= -->
+<div class="contact-timing">
+	<div class="module-heading">
+		<h4 class="module-title">opening time</h4>
+	</div><!-- /.module-heading -->
 
+	<div class="module-body outer-top-xs">
+		<div class="table-responsive">
+			<table class="table">
+				<tbody>
+					<tr><td>Monday-Friday:</td><td class="pull-right">08.00 To 18.00</td></tr>
+					<tr><td>Saturday:</td><td class="pull-right">09.00 To 20.00</td></tr>
+					<tr><td>Sunday:</td><td class="pull-right">10.00 To 20.00</td></tr>
+				</tbody>
+			</table>
+		</div><!-- /.table-responsive -->
+	</div><!-- /.module-body -->
+</div><!-- /.contact-timing -->
 <!-- ============================================================= CONTACT TIMING : END ============================================================= -->            	</div><!-- /.col -->
 
             	<div class="col-xs-12 col-sm-6 col-md-4">
-            		 <!-- ============================================================= INFORMATION============================================================= 
+            		 <!-- ============================================================= INFORMATION============================================================= -->
 <div class="contact-information">
 	<div class="module-heading">
 		<h4 class="module-title">information</h4>
@@ -39,13 +63,30 @@
 	<div class="module-body outer-top-xs">
         <ul class="toggle-footer" style="">
             <li class="media">
-                
+                <div class="pull-left">
+                     <span class="icon fa-stack fa-lg">
+                      <i class="fa fa-circle fa-stack-2x"></i>
+                      <i class="fa fa-map-marker fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
                 <div class="media-body">
-                    <p>FEEDBACK</p>
+                    <p>New Delhi, Delhi</p>
                 </div>
             </li>
 
-            <li class="media">
+              <li class="media">
+                <div class="pull-left">
+                     <span class="icon fa-stack fa-lg">
+                      <i class="fa fa-circle fa-stack-2x"></i>
+                      <i class="fa fa-mobile fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+                <div class="media-body">
+                    <p>(011) 000000000000<br>(011) 000000000000</p>
+                </div>
+            </li>
+
+              <li class="media">
                 <div class="pull-left">
                      <span class="icon fa-stack fa-lg">
                       <i class="fa fa-circle fa-stack-2x"></i>
@@ -53,23 +94,9 @@
                     </span>
                 </div>
                 <div class="media-body">
-                    <span>catalogfd@gmail.com</span>
+                    <span><a href="#">info@phpgurukul.com</a></span>
                 </div>
             </li>
-
-              <li class="media">
-                <div class="pull-left">
-                     <span class="icon fa-stack fa-lg">
-                      <i class="fa fa-paper-plane-o" style="font-size:24px"></i>
-                      
-                    </span>
-                </div>
-                <div class="media-body">
-                    <p>@neildvr</p>
-                </div>
-            </li>
-
-              
               
             </ul>
     </div><!-- /.module-body -->

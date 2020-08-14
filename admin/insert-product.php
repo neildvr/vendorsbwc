@@ -41,323 +41,6 @@ $_SESSION['msg']="Product Inserted Successfully !!";
 
 
 ?>
-
-
-
-
-<?php
-// Database configuration
-
-
-// Create database connection
-$db = $con;
-
-// Check connection
-if ($db->connect_error) {
-    die("Connection failed: " . $db->connect_error);
-}
-if(isset($_POST['submit1'])){ 
-    // Include the database configuration file 
-    $category=$_POST['category'];
-	$subcat=$_POST['subcategory'];
-	$productname=$_POST['productName'];
-	$productcompany=$_POST['productCompany'];
-	$productprice=$_POST['productprice'];
-	$productpricebd=$_POST['productpricebd'];
-	$productdescription=$_POST['productDescription'];
-	$productscharge=$_POST['productShippingcharge'];
-	$productavailability=$_POST['productAvailability'];
-	$productimage1=$_FILES["productimage1"]["name"];
-	$productimage2=$_FILES["productimage2"]["name"];
-	$productimage3=$_FILES["productimage3"]["name"];
-
-
-
-
-
-
-
-
-
-
-
-
-
-     
-    // File upload configuration 
-    $targetDir = "productimages"; 
-    $allowTypes = array('jpg','png','jpeg','gif'); 
-     
-     //get an id of the files
-
-    $query=mysqli_query($db,"select max(id) as pid from products");
-	$result=mysqli_fetch_array($query);
-	$productid=$result['pid']+1;
-    $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = ''; 
-    $fileNames = array_filter($_FILES['files']['name']); 
-    if(!empty($fileNames)){ 
-        foreach($_FILES['files']['name'] as $key=>$val){ 
-            // File upload path 
-            $fileName = basename($_FILES['files']['name'][$key]); 
-            $dir="productimages/$productid/";
-			if(!is_dir($dir)){
-				mkdir("productimages/".$productid);
-			}
-            $targetFilePath = $dir . $fileName; 
-             
-            // Check whether file type is valid 
-            $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
-            if(in_array($fileType, $allowTypes)){ 
-                // Upload file to server 
-                if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){ 
-                    // Image db insert sql 
-                	
-
-
-                    $insertValuesSQL .= "('".$fileName."', NOW()),"; 
-                }else{ 
-                    $errorUpload .= $_FILES['files']['name'][$key].' | '; 
-                } 
-            }else{ 
-                $errorUploadType .= $_FILES['files']['name'][$key].' | '; 
-            } 
-        } 
-
-
-
-
-
-         
-        if(!empty($insertValuesSQL)){ 
-            $insertValuesSQL = trim($insertValuesSQL, ','); 
-            
-             $insert = $db->query("insert into products(category,subCategory,productName,productCompany,productPrice,productDescription,shippingCharge,productAvailability,productImage1,productImage2,productImage3,productPriceBeforeDiscount) values('$category','$subcat','$productname','$productcompany','$productprice','$productdescription','$productscharge','$productavailability','$fileName','$productimage2','$productimage3','$productpricebd')"); 
-
-            
-
-
-
-
-
-
-
-
-            if($insert){ 
-                $errorUpload = !empty($errorUpload)?'Upload Error: '.trim($errorUpload, ' | '):''; 
-                $errorUploadType = !empty($errorUploadType)?'File Type Error: '.trim($errorUploadType, ' | '):''; 
-                $errorMsg = !empty($errorUpload)?'<br/>'.$errorUpload.'<br/>'.$errorUploadType:'<br/>'.$errorUploadType; 
-                $statusMsg = "Files are uploaded successfully.".$errorMsg; 
-            }else{ 
-                $statusMsg = "Sorry, there was an error uploading your file."; 
-            } 
-        } 
-    }else{ 
-        $statusMsg = 'Please select a file to upload.'; 
-    } 
-     
-    // Display status message 
-    echo $statusMsg; 
-} 
-?>
-
-
-
-<?php
-// Database configuration
-
-
-// Create database connection
-$db = $con;
-
-// Check connection
-if ($db->connect_error) {
-    die("Connection failed: " . $db->connect_error);
-}
-
-
-if(isset($_POST['submit3'])){ 
-    // Include the database configuration file 
-   
-   
-
-    $category=$_POST['category'];
-	$subcat=$_POST['subcategory'];
-	$productname=$_POST['productName'];
-	$productcompany=$_POST['productCompany'];
-	$productprice=$_POST['productprice'];
-	$productpricebd=$_POST['productpricebd'];
-	$productdescription=$_POST['productDescription'];
-	$productscharge=$_POST['productShippingcharge'];
-	$productavailability=$_POST['productAvailability'];
-	$productimage1=$_FILES["productimage1"]["name"];
-	$productimage2=$_FILES["productimage2"]["name"];
-	$productimage3=$_FILES["productimage3"]["name"];
-
-
-
-
-
-
-
-
-    // File upload configuration 
-    $targetDir = "productimages/"; 
-    $allowTypes = array('jpg','png','jpeg','gif'); 
-     
-    $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = ''; 
-    $fileNames = array_filter($_FILES['files']['name']); 
-    if(!empty($fileNames)){ 
-        foreach($_FILES['files']['name'] as $key=>$val){ 
-            // File upload path 
-            $fileName = basename($_FILES['files']['name'][$key]); 
-            $targetFilePath = $targetDir . $fileName; 
-             
-            // Check whether file type is valid 
-            $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
-            if(in_array($fileType, $allowTypes)){ 
-                // Upload file to server 
-                if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){ 
-                    // Image db insert sql 
-                    $insertValuesSQL .= "('".$category."', '".$subcat."', '".$fileName."', NOW()),"; 
-                }else{ 
-                    $errorUpload .= $_FILES['files']['name'][$key].' | '; 
-                } 
-            }else{ 
-                $errorUploadType .= $_FILES['files']['name'][$key].' | '; 
-            } 
-        } 
-         
-        if(!empty($insertValuesSQL)){ 
-            $insertValuesSQL = trim($insertValuesSQL, ','); 
-            // Insert image file name into database 
-            $insert = $db->query("INSERT INTO products (category, subCategory, productImage1, postingDate) VALUES $insertValuesSQL"); 
-            if($insert){ 
-                $errorUpload = !empty($errorUpload)?'Upload Error: '.trim($errorUpload, ' | '):''; 
-                $errorUploadType = !empty($errorUploadType)?'File Type Error: '.trim($errorUploadType, ' | '):''; 
-                $errorMsg = !empty($errorUpload)?'<br/>'.$errorUpload.'<br/>'.$errorUploadType:'<br/>'.$errorUploadType; 
-                $statusMsg = "Files are uploaded successfully.".$errorMsg; 
-            }else{ 
-                $statusMsg = "Sorry, there was an error uploading your file."; 
-            } 
-        } 
-    }else{ 
-        $statusMsg = 'Please select a file to upload.'; 
-    } 
-     
-    // Display status message 
-    echo $statusMsg; 
-} 
-
-
-
-
-
-if(isset($_POST['submit2'])){ 
-    // Include the database configuration file 
-    $category=$_POST['category'];
-	$subcat=$_POST['subcategory'];
-	$productname=$_POST['productName'];
-	$productcompany=$_POST['productCompany'];
-	$productprice=$_POST['productprice'];
-	$productpricebd=$_POST['productpricebd'];
-	$productdescription=$_POST['productDescription'];
-	$productscharge=$_POST['productShippingcharge'];
-	$productavailability=$_POST['productAvailability'];
-	$productimage1=$_FILES["productimage1"]["name"];
-	$productimage2=$_FILES["productimage2"]["name"];
-	$productimage3=$_FILES["productimage3"]["name"];
-
-
-
-
-
-
-
-
-
-
-
-
-
-     
-    // File upload configuration 
-    $targetDir = "productimages"; 
-    $allowTypes = array('jpg','png','jpeg','gif'); 
-     
-     //get an id of the files
-
-    $query=mysqli_query($db,"select max(id) as pid from products");
-	$result=mysqli_fetch_array($query);
-	$productid=$result['pid']+1;
-    $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = ''; 
-    $fileNames = array_filter($_FILES['files']['name']); 
-    if(!empty($fileNames)){ 
-        foreach($_FILES['files']['name'] as $key=>$val){ 
-            // File upload path 
-            $fileName = basename($_FILES['files']['name'][$key]); 
-            $dir="productimages/$productid/";
-			if(!is_dir($dir)){
-				mkdir("productimages/".$productid);
-			}
-            $targetFilePath = $dir . $fileName; 
-             
-            // Check whether file type is valid 
-            $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
-            if(in_array($fileType, $allowTypes)){ 
-                // Upload file to server 
-                if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){ 
-                    // Image db insert sql 
-                	
-
-
-                    $insertValuesSQL .= "('".$fileName."', NOW()),"; 
-                }else{ 
-                    $errorUpload .= $_FILES['files']['name'][$key].' | '; 
-                } 
-            }else{ 
-                $errorUploadType .= $_FILES['files']['name'][$key].' | '; 
-            } 
-        } 
-
-
-
-
-
-         
-        if(!empty($insertValuesSQL)){ 
-            $insertValuesSQL = trim($insertValuesSQL, ','); 
-            
-             $insert = $db->query("insert into products(category,subCategory,productName,productCompany,productPrice,productDescription,shippingCharge,productAvailability,productImage1,productImage2,productImage3,productPriceBeforeDiscount) values('$category','$subcat','$productname','$productcompany','$productprice','$productdescription','$productscharge','$productavailability','$fileName','$productimage2','$productimage3','$productpricebd')"); 
-
-            
-
-
-
-
-
-
-
-
-            if($insert){ 
-                $errorUpload = !empty($errorUpload)?'Upload Error: '.trim($errorUpload, ' | '):''; 
-                $errorUploadType = !empty($errorUploadType)?'File Type Error: '.trim($errorUploadType, ' | '):''; 
-                $errorMsg = !empty($errorUpload)?'<br/>'.$errorUpload.'<br/>'.$errorUploadType:'<br/>'.$errorUploadType; 
-                $statusMsg = "Files are uploaded successfully.".$errorMsg; 
-            }else{ 
-                $statusMsg = "Sorry, there was an error uploading your file."; 
-            } 
-        } 
-    }else{ 
-        $statusMsg = 'Please select a file to upload.'; 
-    } 
-     
-    // Display status message 
-    echo $statusMsg; 
-} 
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -445,7 +128,7 @@ while($row=mysqli_fetch_array($query))
 
 									
 <div class="control-group">
-<label class="control-label"  for="basicinput">Sub Category</label>
+<label class="control-label" for="basicinput">Sub Category</label>
 <div class="controls">
 <select   name="subcategory"  id="subcategory" class="span8 tip" required>
 </select>
@@ -453,17 +136,83 @@ while($row=mysqli_fetch_array($query))
 </div>
 
 
+<div class="control-group">
+<label class="control-label" for="basicinput">Product Name</label>
+<div class="controls">
+<input type="text"    name="productName"  placeholder="Enter Product Name" class="span8 tip" required>
+</div>
+</div>
 
+<div class="control-group">
+<label class="control-label" for="basicinput">Product Company</label>
+<div class="controls">
+<input type="text"    name="productCompany"  placeholder="Enter Product Comapny Name" class="span8 tip" required>
+</div>
+</div>
+<div class="control-group">
+<label class="control-label" for="basicinput">Product Price Before Discount</label>
+<div class="controls">
+<input type="text"    name="productpricebd"  placeholder="Enter Product Price" class="span8 tip" required>
+</div>
+</div>
 
+<div class="control-group">
+<label class="control-label" for="basicinput">Product Price After Discount(Selling Price)</label>
+<div class="controls">
+<input type="text"    name="productprice"  placeholder="Enter Product Price" class="span8 tip" required>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label" for="basicinput">Product Description</label>
+<div class="controls">
+<textarea  name="productDescription"  placeholder="Enter Product Description" rows="6" class="span8 tip">
+</textarea>  
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label" for="basicinput">Product Shipping Charge</label>
+<div class="controls">
+<input type="text"    name="productShippingcharge"  placeholder="Enter Product Shipping Charge" class="span8 tip" required>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label" for="basicinput">Product Availability</label>
+<div class="controls">
+<select   name="productAvailability"  id="productAvailability" class="span8 tip" required>
+<option value="">Select</option>
+<option value="In Stock">In Stock</option>
+<option value="Out of Stock">Out of Stock</option>
+</select>
+</div>
+</div>
 
 
 
 <div class="control-group">
-	<form action="" method="post" enctype="multipart/form-data">
-    Select Image Files to Upload:
-    <input type="file" name="files[]" multiple >
-    <input type="submit" name="submit3" value="UPLOAD">
- 	</form>
+<label class="control-label" for="basicinput">Product Image1</label>
+<div class="controls">
+<input type="file" name="productimage1" id="productimage1" value="" class="span8 tip" required>
+</div>
+</div>
+
+
+<div class="control-group">
+<label class="control-label" for="basicinput">Product Image2</label>
+<div class="controls">
+<input type="file" name="productimage2"  class="span8 tip" required>
+</div>
+</div>
+
+
+
+<div class="control-group">
+<label class="control-label" for="basicinput">Product Image3</label>
+<div class="controls">
+<input type="file" name="productimage3"  class="span8 tip">
+</div>
 </div>
 
 	<div class="control-group">
